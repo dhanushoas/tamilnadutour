@@ -103,6 +103,8 @@ export class HomeComponent {
 fetchImage(imageName: string, property: keyof this) {
   this.imageService.getImageByName(imageName).subscribe({
     next: (response) => {
+      console.log(response);
+      
       const blob = new Blob([response], { type: response.type });
       (this as any)[property] = URL.createObjectURL(blob);
     },

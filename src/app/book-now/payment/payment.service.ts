@@ -2,12 +2,15 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, catchError, throwError } from 'rxjs';
 import { Book } from '../book.service'; // Assuming you have a Book interface defined
+import { URL } from 'src/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PaymentService {
-  private baseUrl = 'http://localhost:3000'; // Update with your server base URL
+  // private baseUrl = 'http://localhost:3000'; // Update with your server base URL
+  private baseUrl=URL.prodUrl;
+  
 
   constructor(private http: HttpClient) {}
 

@@ -4,6 +4,7 @@ import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http'
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { UserService } from '../user/user.service';
+import { URL } from 'src/environment';
 
 
 @Injectable({
@@ -13,7 +14,9 @@ export class VisitService {
   getLoggedInUser() {
     throw new Error('Method not implemented.');
   }
-  private apiUrl = 'http://localhost:3000';
+  // private apiUrl = 'http://localhost:3000';
+  private apiUrl=URL.prodUrl;
+  
 
   constructor(private http: HttpClient, private userService: UserService) {}
 

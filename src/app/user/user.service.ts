@@ -3,12 +3,15 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { BehaviorSubject, Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { User } from './user';
+import { URL } from 'src/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class UserService {
-  private baseUrl = 'http://localhost:3000';
+  // private baseUrl = 'http://localhost:3000';
+
+   private baseUrl=URL.prodUrl;
 
   constructor(private http: HttpClient) {}
 

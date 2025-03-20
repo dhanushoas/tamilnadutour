@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { VisitService } from '../visit.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from 'src/app/user/user.service';
+import { URL } from 'src/environment';
 
 @Component({
   selector: 'app-district',
@@ -13,6 +14,9 @@ export class DistrictComponent implements OnInit {
   images: any[] = [];
   selectedPlaces: any[] = [];
   location: string = '';
+
+     private baseUrl=URL.prodUrl;
+  
 
   constructor(
     private visitService: VisitService,
@@ -99,6 +103,6 @@ export class DistrictComponent implements OnInit {
   }
 
   getImageUrl(imageName: string): string {
-    return `http://localhost:3000/image/images/${imageName}`;
+    return `${this.baseUrl}/image/images/${imageName}`;
   }
 }

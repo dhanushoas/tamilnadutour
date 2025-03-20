@@ -1,11 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { URL } from 'src/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ImageService {
-  baseUrl: string = 'http://localhost:3000/image';
+  // baseUrl: string = 'http://localhost:3000/image';
+   baseUrl=URL.prodUrl;
+  
 
   constructor(private http: HttpClient) {}
 
@@ -18,7 +21,7 @@ export class ImageService {
   }
 
   getImageByName(imageName: string) {
-    return this.http.get(`${this.baseUrl}/getImageByName/${imageName}`, { responseType: 'blob' });
+    return this.http.get(`${this.baseUrl}/image/getImageByName/${imageName}`, { responseType: 'blob' });
   }
 
   updateImage(imageName: string, newName: string, newLocation: string) {

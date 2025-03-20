@@ -2,12 +2,14 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, catchError, throwError } from 'rxjs';
 import { Book } from './book';
+import { URL } from 'src/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class BookService {
-  private baseUrl = 'http://localhost:3000';
+  // private baseUrl = 'http://localhost:3000';
+  private baseUrl=URL.prodUrl;
 
   constructor(private http: HttpClient) {}
 
