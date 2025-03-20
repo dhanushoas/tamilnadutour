@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
@@ -62,7 +63,7 @@ import { AdminHomeComponent } from './admin/admin-home/admin-home.component';
     ReactiveFormsModule,
     FormsModule,
   ],
-  providers: [UserService, BookService, AdminService, ImageService],
+  providers: [UserService, BookService, AdminService, ImageService,{ provide: LocationStrategy, useClass: HashLocationStrategy }],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
