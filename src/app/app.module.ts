@@ -29,6 +29,7 @@ import { AllPaymentsComponent } from './admin/admin-dashboard/all-payments/all-p
 import { ImageService } from './admin/admin-dashboard/image-upload/image.service';
 import { FollowUsComponent } from './follow-us/follow-us.component';
 import { AdminHomeComponent } from './admin/admin-home/admin-home.component';
+import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -62,7 +63,7 @@ import { AdminHomeComponent } from './admin/admin-home/admin-home.component';
     ReactiveFormsModule,
     FormsModule,
   ],
-  providers: [UserService, BookService, AdminService, ImageService],
+  providers: [UserService, BookService, AdminService, ImageService,{ provide: LocationStrategy, useClass: HashLocationStrategy }],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

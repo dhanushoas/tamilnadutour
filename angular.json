@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/bcrypt",
+            "outputPath": "dist/UI",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": [
@@ -22,7 +22,12 @@
             "tsConfig": "tsconfig.app.json",
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              "src/assets",
+              {
+                "glob": "index.html",
+                "input": "dist/bcrypt",
+                "output": "./404.html"
+              }
             ],
             "styles": [
               "src/styles.css"
@@ -43,7 +48,8 @@
                   "maximumError": "900kb"
                 }
               ],
-              "outputHashing": "all"
+              "outputHashing": "all",
+              "baseHref": "/tamilnadutour/"
             },
             "development": {
               "buildOptimizer": false,
@@ -91,6 +97,9 @@
             ],
             "scripts": []
           }
+        },
+        "deploy": {
+          "builder": "angular-cli-ghpages:deploy"
         }
       }
     }
