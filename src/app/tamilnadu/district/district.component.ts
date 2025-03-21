@@ -15,8 +15,7 @@ export class DistrictComponent implements OnInit {
   selectedPlaces: any[] = [];
   location: string = '';
 
-     private baseUrl=URL.prodUrl;
-  
+  private baseUrl = URL.prodUrl;
 
   constructor(
     private visitService: VisitService,
@@ -26,40 +25,50 @@ export class DistrictComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    // Listen for query parameter changes and update location
     this.route.queryParams.subscribe(params => {
       if (params['location']) {
-        this.location = params['location'].toLowerCase(); // Convert to lowercase
-        this.getImages();
+        this.location = params['location'].toLowerCase().trim(); // Convert to lowercase and trim spaces
+        this.getImages(); // Fetch images
+      } else {
+        console.warn('No location provided in query params.');
+        this.redirectToHome();
       }
     });
   }
 
   getImages(): void {
+    if (!this.location) {
+      console.error('Location is empty. Skipping API call.');
+      return;
+    }
+
     this.visitService.getData(this.location).subscribe({
       next: (data) => {
-        if (data.length > 0) {
+        if (data && data.length > 0) {
           this.images = data.map((image: { name: string }) => ({
             ...image,
             name: this.capitalizeFirstLetter(image.name)
           }));
         } else {
-          this.redirectToHome(); // If no images, redirect
+          console.warn(`No images found for location: ${this.location}`);
+          this.redirectToHome();
         }
       },
       error: (error) => {
-        console.error('Error loading images:', error);
-        this.redirectToHome(); // Handle API errors by redirecting
+        console.error('Error fetching images:', error);
+        this.redirectToHome();
       }
     });
   }
 
   redirectToHome(): void {
     alert(`No images found for "${this.location}". Redirecting to home.`);
-    this.router.navigate(['/']); // Redirect to home page (or another page)
+    this.router.navigate(['/']); // Redirect to home
   }
 
   capitalizeFirstLetter(word: string): string {
-    return word.charAt(0).toUpperCase() + word.slice(1);
+    return word ? word.charAt(0).toUpperCase() + word.slice(1) : '';
   }
 
   addtoCartAndStore(image: any): void {
@@ -73,7 +82,11 @@ export class DistrictComponent implements OnInit {
 
         this.selectedPlaces.push(place);
 
-        this.visitService.storeSelectedPlaces({ username, location, selectedPlaces: [place.name] }).subscribe({
+        this.visitService.storeSelectedPlaces({
+          username,
+          location,
+          selectedPlaces: [place.name]
+        }).subscribe({
           next: (response) => {
             console.log('Selected places stored successfully:', response);
           },
