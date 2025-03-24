@@ -9,12 +9,13 @@ import { ImageService } from '../admin/admin-dashboard/image-upload/image.servic
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent {
+  currentYear: number = new Date().getFullYear();
   searchText: string = '';
   districts: string[] = [
     'Ariyalur', 'Chengalpattu', 'Chennai', 'Coimbatore', 'Cuddalore', 'Dharmapuri', 
     'Dindigul', 'Erode', 'Kallakurichi', 'Kanchipuram', 'Kanyakumari', 'Karur',
     'Krishnagiri', 'Madurai', 'Nagapattinam', 'Namakkal', 'Perambalur', 'Pudukkottai',
-    'Ramanathapuram', 'Ranipet', 'Salem', 'Sivaganga', 'Tenkasi', 'Thanjavur', 
+    'Ramanathapuram', 'Ranipet', 'Salem', 'Sivagangai', 'Tenkasi', 'Thanjavur', 
     'Theni', 'Thoothukudi', 'Tiruchirappalli', 'Tirunelveli', 'Tirupathur', 'Tiruppur',
     'Tiruvallur', 'Tiruvannamalai', 'Tiruvarur', 'Vellore', 'Viluppuram', 'Virudhunagar'
   ];
@@ -72,6 +73,12 @@ export class HomeComponent {
     }
   }
 
+  clearSearch(): void {
+    this.searchText = '';
+    this.filteredDistricts = [];
+    this.selectedIndex = -1;
+  }
+
   tamilnaduImage: string = '';
   templeImage: string = '';
   educationImage: string = '';
@@ -100,18 +107,17 @@ export class HomeComponent {
     this.fetchImage('srirangam', 'srirangamImage');
   }
 
-fetchImage(imageName: string, property: keyof this) {
-  this.imageService.getImageByName(imageName).subscribe({
-    next: (response) => {
-      console.log(response);
-      
-      const blob = new Blob([response], { type: response.type });
-      (this as any)[property] = URL.createObjectURL(blob);
-    },
-    error: (err) => {
-      console.error(`Error fetching ${imageName} image:`, err);
-    }
-  });
-}
-
+  fetchImage(imageName: string, property: keyof this) {
+    this.imageService.getImageByName(imageName).subscribe({
+      next: (response) => {
+        console.log(response);
+        
+        const blob = new Blob([response], { type: response.type });
+        (this as any)[property] = URL.createObjectURL(blob);
+      },
+      error: (err) => {
+        console.error(`Error fetching ${imageName} image:`, err);
+      }
+    });
+  }
 }

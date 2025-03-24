@@ -1,44 +1,50 @@
 <div class="container mt-3">
   <div class="row">
     <div class="container position-relative">
-      <!-- Tamil Nadu Image (Displayed First) -->
       <img *ngIf="tamilnaduImage" [src]="tamilnaduImage" class="img-fluid" alt="Tamil Nadu Image">
-      <!-- <img src="/assets/tamilnadu.jpg" class="img-fluid"/> -->
       <div class="position-absolute mt-5 ms-5 p-2 top-0 start-5" style="color: white;">
         <div class="input-group position-relative">
-          <input id="searchInput" 
-                 type="text" 
-                 class="form-control" 
-                 placeholder="Search District" 
-                 aria-label="Search" 
-                 aria-describedby="searchButton" 
-                 [(ngModel)]="searchText"
-                 (input)="filterDistricts()"
-                 (keydown)="handleKeyDown($event)" 
-                 (keyup.enter)="searchDistrict()" 
-                 style="width: 350px;">
+          <div class="search-container">
+            <div class="search-box" [class.active]="filteredDistricts.length > 0">
+              <i class="bi bi-search search-icon"></i>
+              
+              <input
+                type="text"
+                class="search-input"
+                placeholder="Search..."
+                [(ngModel)]="searchText"
+                (input)="filterDistricts()"
+                (keyup.enter)="searchDistrict()"
+                (keydown)="handleKeyDown($event)"
+              />
           
-          <button class="btn btn-outline-primary" type="button" (click)="searchDistrict()">SEARCH</button>
-        
-          <ul *ngIf="filteredDistricts.length > 0" 
-              class="list-group position-absolute w-100 bg-light" 
-              style="z-index: 1000; top: 100%;">
-            <li *ngFor="let district of filteredDistricts; let i = index" 
-                class="list-group-item list-group-item-action" 
-                [class.active]="i === selectedIndex"
-                (click)="selectDistrict(district)">
-              {{ district }}
-            </li>
-          </ul>
-        </div>                
-      </div>
+              <i *ngIf="searchText" class="bi bi-x-circle clear-icon" (click)="clearSearch()"></i>
+            </div>
+          
+            <!-- Suggestions Inside the Search Box -->
+            <div *ngIf="filteredDistricts.length > 0" class="suggestions-box">
+              <ul class="suggestions">
+                <li
+                  *ngFor="let district of filteredDistricts; let i = index"
+                  [class.active]="i === selectedIndex"
+                  (click)="selectDistrict(district)"
+                >
+                  <i class="bi bi-search suggestion-icon"></i>
+                  {{ district }}
+                </li>
+              </ul>
+            </div>
+          </div>
+                   
+        </div>
+      </div>      
     </div>
   </div>
 
   <div class="mt-3 mb-3 text-center">
     <h1>
-      <span style="color: crimson">TAMILNADU TOUR</span> & HOLIDAY PACKAGES 2024
-    </h1>
+      <span style="color: crimson">TAMILNADU TOUR</span> & HOLIDAY PACKAGES {{ currentYear }}
+    </h1>    
   </div>
   <p class="mt-3">A Kaleidoscope of traditions, culture, and vibrant geographies, Tamilnadu speaks for itself as a soul-stirring journey. Snow-covered peaks of the Himalayas stretch of coastline, natural greenery to depths of spirituality, and clusters of cultural shades. All of these aspects join together to define the raw beauty through which Tamilnadu captures the heart of every tourist.
 

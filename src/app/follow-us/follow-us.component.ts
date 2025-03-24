@@ -6,5 +6,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./follow-us.component.css']
 })
 export class FollowUsComponent {
+  currentYear: number = new Date().getFullYear();
+
 
 }
