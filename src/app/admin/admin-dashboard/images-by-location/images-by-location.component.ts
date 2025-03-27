@@ -34,7 +34,7 @@ export class ImagesByLocationComponent {
   }
 
   getImageUrl(imageName: string) {
-    return `${this.imageService.baseUrl}image/images/${imageName}`;
+    return `${this.imageService.baseUrl}/image/images/${imageName}`;
   }
 
   uploadImage() {
