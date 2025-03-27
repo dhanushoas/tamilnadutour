@@ -32,13 +32,20 @@ export class PostComponent implements OnInit {
     this.bookForm = this.fb.group({
       customId: [generatedBookingId, [Validators.required, Validators.pattern('[0-9]{6}')]],
       nameOfVisitor: ['', Validators.required],
-      mobileNumber: ['', [Validators.required, Validators.pattern('[6-9]\\d{9}')]],
+      mobileNumber: ['', [Validators.required, Validators.pattern(/^[6-9]\d{9}$/)]],
       date: [this.getTodayDate(), Validators.required],
       visitingPlaces: ['', Validators.required],
       noOfDays: ['', Validators.required],
       noOfMembers: ['', Validators.required],
       totalCost: [this.baseCost, Validators.required],
     });
+  }
+
+  validateNumberInput(event: KeyboardEvent) {
+    const charCode = event.which ? event.which : event.keyCode;
+    if (charCode < 48 || charCode > 57) {
+      event.preventDefault();
+    }
   }
 
   ngOnInit(): void {

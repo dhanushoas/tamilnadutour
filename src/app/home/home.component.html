@@ -11,7 +11,7 @@
               <input
                 type="text"
                 class="search-input"
-                placeholder="Search..."
+                placeholder="Search Districts"
                 [(ngModel)]="searchText"
                 (input)="filterDistricts()"
                 (keyup.enter)="searchDistrict()"
@@ -60,7 +60,7 @@
         <!-- <img src="/assets/temple.jpg" alt="" class="img-fluid img-thumbnail" > -->
         <div class="position-absolute top-50 start-50 translate-middle text-center" style="color: white;">
           <h3>Devotional Packages</h3>
-          <button class="btn btn-warning">108 TOURS</button>
+          <button class="btn btn-warning" (click)="searchDevotionalTours()">108 TOURS</button>
         </div>
       </div>
     </div>
@@ -70,7 +70,7 @@
         <!-- <img src="/assets/education.jpg" alt="" class="img-fluid img-thumbnail"> -->
         <div class="position-absolute top-50 start-50 translate-middle text-center" style="color: white;">
           <h3>Educational Packages</h3>
-          <button class="btn btn-warning">12 TOURS</button>
+          <button class="btn btn-warning" (click)="searchEducationalTours()">12 TOURS</button>
         </div>
       </div>
     </div>
@@ -85,7 +85,7 @@
         <!-- <img src="/assets/honeymoon.jpg" alt="" class="img-fluid img-thumbnail"> -->
         <div class="position-absolute top-50 start-50 translate-middle text-center" style="color: white;">
           <h3>Honeymoon Packages</h3>
-          <button class="btn btn-warning">17 TOURS</button>
+          <button class="btn btn-warning" (click)="searchHoneymoonTours()">17 TOURS</button>
         </div>
       </div>
     </div>
@@ -95,7 +95,7 @@
         <!-- <img src="/assets/mountain.jpg" alt="" class="img-fluid img-thumbnail"> -->
         <div class="position-absolute top-50 start-50 translate-middle text-center" style="color: white;">
           <h3>Nature Packages</h3>
-          <button class="btn btn-warning">44 TOURS</button>
+          <button class="btn btn-warning" (click)="searchNatureTours()">44 TOURS</button>
         </div>
       </div>
     </div>
@@ -105,7 +105,7 @@
         <!-- <img src="/assets/party.jpg" alt="" class="img-fluid img-thumbnail"> -->
         <div class="position-absolute top-50 start-50 translate-middle text-center" style="color: white;">
           <h3>DJ Packages</h3>
-          <button class="btn btn-warning">15 TOURS</button>
+          <button class="btn btn-warning" (click)="searchDjTours()">15 TOURS</button>
         </div>
       </div>
     </div>

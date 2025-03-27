@@ -120,4 +120,21 @@ export class HomeComponent {
       }
     });
   }
+
+searchEducationalTours(): void {
+  this.router.navigate(['/district'], { queryParams: { location: 'educational' } });
+}
+searchDevotionalTours(): void {
+  this.router.navigate(['/district'], { queryParams: { location: 'devotional' } });
+}
+searchDjTours(): void {
+  this.router.navigate(['/district'], { queryParams: { location: 'dj' } });
+}
+searchNatureTours(): void {
+  this.router.navigate(['/district'], { queryParams: { location: 'nature' } });
+}
+searchHoneymoonTours(): void {
+  this.router.navigate(['/district'], { queryParams: { location: 'honeymoon' } });
+}
+
 }
