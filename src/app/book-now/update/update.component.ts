@@ -12,7 +12,7 @@ import { BookService } from '../book.service';
 export class UpdateComponent implements OnInit {
   bookForm: FormGroup;
   book: Book = new Book();
-  baseCost: number = 1000;  // Base cost (set your default value)
+  baseCost: number = 1000;
   additionalCostPerMember: number = 200;
   additionalCostPerDay: number = 1000;
 
@@ -25,14 +25,29 @@ export class UpdateComponent implements OnInit {
     this.bookForm = this.fb.group({
       customId: ['', [Validators.required, Validators.pattern('[0-9]{6}')]],
       nameOfVisitor: ['', Validators.required],
-      mobileNumber: ['', [Validators.required, Validators.pattern(/^[6-9]\d{9}$/)]],
-      date: ['', Validators.required],
+      mobileNumber: ['', [Validators.required, Validators.pattern(/^[9876]\d{9}$/)]],
+      date: [this.getTodayDate(), Validators.required],
       visitingPlaces: ['', Validators.required],
-      noOfDays: ['', [Validators.required, Validators.min(1)]],  // Editable
-      noOfMembers: ['', [Validators.required, Validators.min(1)]],  // Editable
+      noOfDays: [
+        '', 
+        [Validators.required, Validators.pattern(/^\d{1,2}$/), Validators.max(7)]
+      ],  
+      noOfMembers: [
+        '', 
+        [Validators.required, Validators.pattern(/^\d{1,2}$/), Validators.max(30)]
+      ],
       totalCost: [{ value: this.baseCost, disabled: true }, Validators.required],  // Not editable
     });
   }
+
+  private getTodayDate(): string {
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = (today.getMonth() + 1).toString().padStart(2, '0');
+    const day = today.getDate().toString().padStart(2, '0');
+    return year + '-' + month + '-' + day;
+  }
+  
 
   ngOnInit(): void {
     this.getBookByCustomId();
@@ -90,4 +105,11 @@ export class UpdateComponent implements OnInit {
       event.preventDefault();
     }
   }
+
+  validateNumericInput(event: KeyboardEvent) {
+    const inputChar = String.fromCharCode(event.charCode);
+    if (!/^\d$/.test(inputChar)) {
+      event.preventDefault();
+  }
+}
 }

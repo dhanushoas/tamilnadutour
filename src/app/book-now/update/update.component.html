@@ -18,7 +18,8 @@
           type="tel" 
           class="form-control" 
           formControlName="mobileNumber" 
-          maxlength="10" 
+          maxlength="10"
+          pattern="[6789][0-9]{9}" 
           required 
           (keypress)="validateNumberInput($event)"
         >
@@ -39,17 +40,21 @@
   
       <div class="form-group">
         <label for="noOfDays"><b>Total Days :</b></label>
-        <input type="number" class="form-control" formControlName="noOfDays" required>
+        <input type="number" class="form-control" formControlName="noOfDays" required maxlength="2" 
+        pattern="\d{1,2}" 
+        (keypress)="validateNumericInput($event)">
         <div style="color: red;" *ngIf="bookForm.get('noOfDays')?.invalid && bookForm.get('noOfDays')?.touched">
-          Number of Days is required
+          Allowed only 7 days.
         </div>
       </div>
   
       <div class="form-group">
         <label for="noOfMembers"><b>Total Members :</b></label>
-        <input type="number" class="form-control" formControlName="noOfMembers" required> 
+        <input type="number" class="form-control" formControlName="noOfMembers" required maxlength="2" 
+        pattern="\d{1,2}" 
+        (keypress)="validateNumericInput($event)"> 
         <div style="color: red;" *ngIf="bookForm.get('noOfMembers')?.invalid && bookForm.get('noOfMembers')?.touched">
-          Number of Members is required
+          Allowed only 30 members.
         </div>
       </div>
   

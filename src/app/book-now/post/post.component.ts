@@ -32,11 +32,17 @@ export class PostComponent implements OnInit {
     this.bookForm = this.fb.group({
       customId: [generatedBookingId, [Validators.required, Validators.pattern('[0-9]{6}')]],
       nameOfVisitor: ['', Validators.required],
-      mobileNumber: ['', [Validators.required, Validators.pattern(/^[6-9]\d{9}$/)]],
+      mobileNumber: ['', [Validators.required, Validators.pattern(/^[9876]\d{9}$/)]],
       date: [this.getTodayDate(), Validators.required],
       visitingPlaces: ['', Validators.required],
-      noOfDays: ['', Validators.required],
-      noOfMembers: ['', Validators.required],
+      noOfDays: [
+        '', 
+        [Validators.required, Validators.pattern(/^\d{1,2}$/), Validators.max(7)]
+      ],  
+      noOfMembers: [
+        '', 
+        [Validators.required, Validators.pattern(/^\d{1,2}$/), Validators.max(30)]
+      ],
       totalCost: [this.baseCost, Validators.required],
     });
   }
@@ -47,6 +53,14 @@ export class PostComponent implements OnInit {
       event.preventDefault();
     }
   }
+
+  validateNumericInput(event: KeyboardEvent) {
+    const inputChar = String.fromCharCode(event.charCode);
+    if (!/^\d$/.test(inputChar)) {
+      event.preventDefault();
+  }
+}
+  
 
   ngOnInit(): void {
     this.fetchImage('booking', 'bookingImage');
