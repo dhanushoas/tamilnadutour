@@ -13,11 +13,11 @@ export class ImageService {
   constructor(private http: HttpClient) {}
 
   uploadImage(formData: FormData) {
-    return this.http.post<any>(`${this.baseUrl}/upload`, formData);
+    return this.http.post<any>(`${this.baseUrl}/image/upload`, formData);
   }
 
   getImagesByLocation(location: string) {
-    return this.http.get<any[]>(`${this.baseUrl}/getImages/${location}`);
+    return this.http.get<any[]>(`${this.baseUrl}/image/getImages/${location}`);
   }
 
   getImageByName(imageName: string) {
@@ -25,10 +25,10 @@ export class ImageService {
   }
 
   updateImage(imageName: string, newName: string, newLocation: string) {
-    return this.http.put<any>(`${this.baseUrl}/images/${imageName}`, { newName, newLocation });
+    return this.http.put<any>(`${this.baseUrl}/image/images/${imageName}`, { newName, newLocation });
   }
 
   deleteImage(imageName: string) {
-    return this.http.delete(`${this.baseUrl}/images/${imageName}`);
+    return this.http.delete(`${this.baseUrl}/image/images/${imageName}`);
   }
 }
